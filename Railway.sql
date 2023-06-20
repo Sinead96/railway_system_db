@@ -256,21 +256,28 @@ USE railway_system_db;
 
 DELIMITER //
 
-CREATE PROCEDURE GetTrainsByDestination(IN dest VARCHAR(100))
+CREATE PROCEDURE GetTrainsByDestination1(IN dest VARCHAR(100))
 BEGIN
-    SELECT * FROM Hogsmeade WHERE destination = dest;
-    SELECT * FROM Diagon_Alley WHERE destination = dest;
-    SELECT * FROM Ministry_of_Magic WHERE destination = dest;
-    SELECT * FROM Azkaban WHERE destination = dest;
-    SELECT * FROM Kings_cross WHERE destination = dest;
-    SELECT * FROM London_Euston WHERE destination = dest;
-    SELECT * FROM London_paddington WHERE destination = dest;
+    SELECT * FROM Hogsmeade WHERE destination = dest
+    UNION ALL
+    SELECT * FROM Diagon_Alley WHERE destination = dest
+    UNION ALL
+    SELECT * FROM Ministry_of_Magic WHERE destination = dest
+    UNION ALL
+    SELECT * FROM Azkaban WHERE destination = dest
+    UNION ALL
+    SELECT * FROM Kings_Cross WHERE destination = dest
+    UNION ALL
+    SELECT * FROM London_Euston WHERE destination = dest
+    UNION ALL
+    SELECT * FROM London_Paddington WHERE destination = dest
+    UNION ALL
     SELECT * FROM London_Bridge WHERE destination = dest;
-END//
+END //
 
 DELIMITER ;
 
-CALL GetTrainsByDestination('Kent');
+CALL GetTrainsByDestination('Hogwarts');
 
 -- stored function
 USE railway_system_db;
